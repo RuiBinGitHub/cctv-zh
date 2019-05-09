@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.ProjectDao">
+
+	<insert id="insertProject" parameterType="Project" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO project VALUES(null,
+			#{no},
+			#{name},
+			#{site},
+			#{client},
+			#{person},
+			#{writer},
+			#{checker},
+			#{approver},
+			#{infoA},
+			#{infoB},
+			#{infoC},
+			#{date},
+			#{user.id},
+			#{company.id}
+		)
+	</insert>
+
+	<update id="updateProject" parameterType="Project">
+		UPDATE project SET no=#{no},
+			name=#{name},
+			site=#{site},
+			client=#{client},
+			person=#{person},
+			writer=#{writer},
+			checker=#{checker},
+			approver=#{approver},
+			infoA=#{infoA},
+			infoB=#{infoB},
+			infoC=#{infoC},
+			date=#{date},
+			userid=#{user.id},
+			companyid=#{company.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteProject" parameterType="Project">
+		DELETE FROM project WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoProject" parameterType="Map" resultMap="ProjectMap">
+		select * from project
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="name != null">
+				and name = #{name}
+			</if>
+			<if test="user != null">
+				and userid = #{user.id}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findListProject" parameterType="Map" resultMap="ProjectMap">
+		select * from project
+		<where>
+			<if test="name != null">
+				and name = #{name}
+			</if>
+			<if test="user != null">
+				and userid = #{user.id}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+		order by date desc
+		<if test="page > 0">
+			limit 15 offset page
+		</if>
+	</select>
+	
+	<select id="getCount" parameterType="Map" resultType="int">
+		select count(*) from project
+		<where>
+			<if test="name != null">
+				and name like #{name}
+			</if>
+			<if test="user != null">
+				and userid = #{user.id}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="ProjectMap" type="Project">
+		<id property="id" column="id"/>
+		<result property="no" column="no"/>
+		<result property="name" column="name"/>
+		<result property="site" column="site"/>
+		<result property="client" column="client"/>
+		<result property="person" column="person"/>
+		<result property="writer" column="writer"/>
+		<result property="checker" column="checker"/>
+		<result property="approver" column="approver"/>
+		<result property="infoA" column="infoA"/>
+		<result property="infoB" column="infoB"/>
+		<result property="infoC" column="infoC"/>
+		<result property="date" column="date"/>
+		<result property="user.id" column="userid"/>
+		<result property="company.id" column="companyid"/>
+	</resultMap>
+	
+</mapper>
+ 

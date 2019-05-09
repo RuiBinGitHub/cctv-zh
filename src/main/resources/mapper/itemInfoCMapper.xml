@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.ItemInfoCDao">
+
+	<insert id="insertItemInfoC" parameterType="ItemInfoC" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO itemInfoC VALUES(null,
+			#{inspection},
+			#{workdate1},
+			#{workdate2},
+			#{collect},
+			#{compile},
+			#{project.id}
+		)
+	</insert>
+
+	<update id="updateItemInfoC" parameterType="ItemInfoC">
+		UPDATE itemInfoC SET inspection=#{inspection},
+			workdate1=#{workdate1},
+			workdate2=#{workdate2},
+			collect=#{collect},
+			compile=#{compile},
+			projectid=#{project.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteItemInfoC" parameterType="ItemInfoC">
+		DELETE FROM itemInfoC WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoItemInfoC" parameterType="Map" resultMap="ItemInfoCMap">
+		select * from itemInfoC
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="company != null">
+				and projectid = #{project.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="ItemInfoCMap" type="ItemInfoC">
+		<id property="id" column="id"/>
+		<result property="inspection" column="inspection"/>
+		<result property="workdate1" column="workdate1"/>
+		<result property="workdate2" column="workdate2"/>
+		<result property="collect" column="collect"/>
+		<result property="compile" column="compile"/>
+		<result property="project.id" column="projectid"/>
+	</resultMap>
+</mapper>
+ 

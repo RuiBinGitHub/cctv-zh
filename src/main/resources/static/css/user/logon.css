@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+body {
+	background-color: #f1f1f1;
+}
+#logo {
+	width:1000px;
+	height:80px;
+	margin:0px auto;
+}
+#logo img {
+	width:106px;
+	height:50px;
+	margin:15px 10px;
+	float:left;
+}
+#main {
+	width:1000px;
+	margin:10px auto;
+}
+#mainTop {
+	width:100%;
+	height:48px;
+	margin-top:10px;
+	font-size:20px;
+	font-weight:700;
+	text-indent:20px;
+	line-height:48px;
+	background-color:#fff;
+	border-bottom:2px solid #5EA500;
+	float:left;
+}
+#mainCenter {
+	width:100%;
+	height:auto;
+	background-color:#fff;
+	float:left;
+}
+#tips {
+	width:100%;
+	height:30px;
+	margin-top:25px;
+	color:#ff0000;
+	font-size:18px;
+	font-family:"宋体";
+	font-weight:600;
+	text-align:center;
+	float:left;
+}
+#tab1 {
+	width:450px;
+	margin-top:5px;
+	margin-left:270px;
+	margin-bottom:50px;
+	float:left;
+}
+#tab1 tr {
+	height:75px;
+	font-size:18px;
+	font-family:"宋体";
+	font-weight:600;
+}
+#tab1 a {
+	color: #f00;
+}
+#tab1 input[type=text], #tab1 input[type=password] {
+	width:280px;
+	height:28px;
+	font-size:15px;
+	font-family:"宋体";
+	text-indent:10px;
+	border:1px solid #999;
+	border-radius:3px;
+	float:left;
+}
+.combtn {
+	width:284px;
+	height:32px;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:600;
+	background-color:#5EA500;
+	border-radius:3px;
+	border:none;
+}
+.combtn:hover {
+	background-color:#7bd700;
+	cursor:pointer;
+}

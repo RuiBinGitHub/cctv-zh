@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.ItemInfoBDao">
+
+	<insert id="insertItemInfoB" parameterType="ItemInfoB" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO itemInfoB VALUES(null,
+			#{devices},
+			#{persons},
+			#{project.id}
+		)
+	</insert>
+
+	<update id="updateItemInfoB" parameterType="ItemInfoB">
+		UPDATE itemInfoB SET devices=#{devices},
+			persons=#{persons},
+			projectid=#{project.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteItemInfoB" parameterType="ItemInfoB">
+		DELETE FROM itemInfoB WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoItemInfoB" parameterType="Map" resultMap="ItemInfoBMap">
+		select * from itemInfoB
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="project != null">
+				and projectid = #{project.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="ItemInfoBMap" type="ItemInfoB">
+		<id property="id" column="id"/>
+		<result property="devices" column="devices"/>
+		<result property="persons" column="persons"/>
+		<result property="project.id" column="projectid"/>
+	</resultMap>
+</mapper>
+ 

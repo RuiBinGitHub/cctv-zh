@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.ItemInfoADao">
+
+	<insert id="insertItemInfoA" parameterType="ItemInfoA" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO itemInfoA VALUES(null,
+			#{unit1},
+			#{unit2},
+			#{unit3},
+			#{unit4},
+			#{unit5},
+			#{extents},
+			#{purpose},
+			#{conditio},
+			#{material},
+			#{standard},
+			#{date1},
+			#{date2},
+			#{project.id}
+		)
+	</insert>
+
+	<update id="updateItemInfoA" parameterType="ItemInfoA">
+		UPDATE itemInfoA SET unit1=#{unit1},
+			unit2=#{unit2},
+			unit3=#{unit3},
+			unit4=#{unit4},
+			unit5=#{unit5},
+			extents=#{extents},
+			purpose=#{purpose},
+			conditio=#{conditio},
+			material=#{material},
+			standard=#{standard},
+			date1=#{date1},
+			date2=#{date2},
+			projectid=#{project.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteItemInfoA" parameterType="ItemInfoA">
+		DELETE FROM itemInfoA WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoItemInfoA" parameterType="Map" resultMap="ItemInfoAMap">
+		select * from itemInfoA
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="project != null">
+				and projectid = #{project.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="ItemInfoAMap" type="ItemInfoA">
+		<id property="id" column="id"/>
+		<result property="unit1" column="unit1"/>
+		<result property="unit2" column="unit2"/>
+		<result property="unit3" column="unit3"/>
+		<result property="unit4" column="unit4"/>
+		<result property="unit5" column="unit5"/>
+		<result property="extents" column="extents"/>
+		<result property="purpose" column="purpose"/>
+		<result property="conditio" column="conditio"/>
+		<result property="material" column="material"/>
+		<result property="standard" column="standard"/>
+		<result property="date1" column="date1"/>
+		<result property="date2" column="date2"/>
+		<result property="project.id" column="projectid"/>
+	</resultMap>
+</mapper>
+ 

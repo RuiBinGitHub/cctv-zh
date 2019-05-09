@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+body{
+	//width:100%;
+	height:100%;
+	background-color:#fafafa;
+	background-image:url("/cctv/img/bg-login.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+#main{
+	width:360px;
+	height:400px;
+	margin-top:240px; 
+	margin-right:15%;
+	background:rgba(224,224,224,0.8);
+	border-radius:4px;
+	float:right;
+}
+#tab1{
+	width:260px;
+	height:320px;
+	margin:40px 50px; 
+	float:left;
+}
+#tips{
+	font-size:16px;
+	color:#f00;
+}
+#tab1 img{
+	width:40px;
+	height:40px;
+	float:left;
+}
+#name,#pass{
+	width:218px;
+	height:35.5px;
+	font-size:14px;
+	border:1px solid #AAABAB;
+	text-indent:10px;
+	float:left;
+}
+#tab1 a{
+	color:#666666;
+	font-size:14px;
+	text-decoration:none;
+}
+#tab1 a:hover{
+	color:#019BE1;
+	text-decoration:underline;
+}
+#btn{
+	width:260px;
+	height:40px;
+	font-size:20px;
+	background-color:#5EA500;
+	border:none;
+	color:#fff;
+}
+#btn:hover{
+	background-color:#7ad500;
+	cursor:pointer;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>管道编辑</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/pipe/makepipe.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/laydate/laydate.js"></script>
+    <script type="text/javascript" src="/cctv/js/pipe/makepipe.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">
+          <span style="width:820px;float:left;">管道编辑</span>
+          <input type="button" value="+ 添加" style="background-color:#67C23A"/>
+          <input type="button" value="X 删除" style="background-color:#FF2828"/>
+        </div>
+        <input type="hidden" id="id" th:value="${param.id}"/>
+        <input type="hidden" id="no" th:value="${param.no}"/>
+        <input type="hidden" id="size"  th:value="${size}"/>
+        <!-- ******************************************************************** -->
+        <form id="form1" method="post" th:if="${pipe != null}">
+        <input type="hidden" name="id" th:value="${pipe.id}"/>
+        <input type="hidden" name="project.id" th:value="${param.id}"/>
+        <div id="menu">
+          <span style="width:605px;" th:text="任务名称：+ ${project.name}"></span>
+          <span><a>第</a><input type="text" name="no" th:value="${pipe.no}"/>
+          <a th:text="'页 / 共 ' + ${size} + ' 页'"></a></span>
+        </div>
+        <table id="tab1">
+          <tr>
+            <td width="100px" align="right">录像文件：</td>
+            <td width="160px" align="center"><input type="text" name="video" th:value="${pipe.video}"/></td>
+            <td width="100px" align="right">管段编号：</td>
+            <td width="68px" align="center"><input type="text" name="smanhole" th:value="${pipe.smanhole}"/></td>
+            <td width="22px" align="center">→</td>
+            <td width="68px" align="center"><input type="text" name="fmanhole" th:value="${pipe.fmanhole}"/></td>
+            <td width="100px" align="right">检测方法：</td>
+            <td width="160px" align="center">
+              <select name="method" class="select" th:field="${pipe.method}">
+                <option value="电视检测">电视检测</option>
+                <option value="管道潜望镜检测">管道潜望镜检测</option>
+                <option value="--">--</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">敷设年代：</td>
+            <td align="center"><input type="text" name="laidyear" th:value="${pipe.laidyear}"/></td>
+            <td align="right">起点埋深：</td>
+            <td align="center" colspan="3"><input type="text" name="sdepth" th:value="${pipe.sdepth}"/></td>
+            <td align="right">终点埋深：</td>
+            <td align="center"><input type="text" name="fdepth" th:value="${pipe.fdepth}"/></td>
+          </tr>
+          <tr>
+            <td align="right">管段类型：</td>
+            <td align="center">
+              <select name="pipetype" class="select" th:field="${pipe.pipetype}">
+                <option value="雨水">雨水</option>
+                <option value="污水">污水</option>
+                <option value="合流">合流</option>
+                <option value="--">--</option>
+              </select>
+            </td>
+            <td align="right">管段材质：</td>
+            <td align="center" colspan="3">
+              <select name="material" class="select" th:field="${pipe.material}">
+                <option value="HDPE">HDPE</option>
+                <option value="UPVC">UPVC</option>
+                <option value="钢筋混凝土">钢筋混凝土</option>
+                <option value="玻璃钢夹砂">玻璃钢夹砂</option>
+                <option value="--">--</option>
+              </select>
+            </td>
+            <td align="right">管道直径：</td>
+            <td align="center"><input type="text" name="diameter" th:value="${pipe.diameter}"/></td>
+          </tr>
+          <tr>
+            <td align="right">检测方向：</td>
+            <td align="center">
+              <select name="direction" class="select" th:field="${pipe.direction}">
+                <option value="顺流">顺流</option>
+                <option value="逆流">逆流</option>
+                <option value="--">--</option>
+              </select>
+            </td>
+            <td align="right">管段长度：</td>
+            <td align="center" colspan="3"><input type="text" name="pipelength" th:value="${pipe.pipelength}"/></td>
+            <td align="right">检测长度：</td>
+            <td align="center"><input type="text" name="testlength" th:value="${pipe.testlength}"/></td>
+          </tr>
+          <tr>
+            <td align="right">检测地点：</td>
+            <td align="center" colspan="5"><input type="text" name="site" th:value="${pipe.site}" style="width:100%;"/></td>
+            <td align="right">检测日期：</td>
+            <td align="center"><input type="text" name="date" th:value="${pipe.date}"/></td>
+          </tr>
+        </table>
+        <table id="tab2">
+          <tr height="30px">
+            <td style="text-indent:10px;">视频</td>
+            <td style="text-indent:10px;">图片</td>
+          </tr>
+          <tr height="275px" align="center">
+            <td><video id="video" poster="/cctv/img/poster.png" controls="controls"></video></td>
+            <td><img id="image" src="/cctv/img/00001.png" title="双击可以上传图片"></img></td>
+          </tr>
+        </table>
+        <div id="itemMemu">
+          <div>记录数据</div>
+          <span style="height:100%;line-height:30px;font-weight:700;float:left;">|</span>
+          <input type="button" value="添加" style="background-color:#51C83D"/>
+	      <input type="button" value="插入" style="background-color:#00A3FE"/>
+	      <input type="button" value="移除" style="background-color:#EF414C"/>
+	      <span style="height:100%;line-height:30px;font-weight:700;float:left;">|</span>
+	      <input type="button" value="视频截图" style="width:80px;background-color:#00A3FE"/>
+	      <input type="button" value="保存图片" style="width:80px;background-color:#00A3FE"/>
+	      <input type="button" value="删除图片" style="width:80px;background-color:#EF414C"/>
+	      <input type="button" value="导入图片" style="width:80px;background-color:#117DD5"/>
+	      <canvas id="canvas1" style="display:none"></canvas>
+        </div>
+        <div id="showItem">
+          <table id="tab3">
+        	<thead>
+         	  <tr height="30px">
+               	<th width="4%" rowspan="2"></th>
+                <th width="12%" rowspan="2">距离(m)</th>
+                <th width="12%" rowspan="2">缺陷代码</th>
+                <th width="12%" rowspan="2">等级</th>
+                <th width="12%" rowspan="2">位置</th>
+                <th width="12%" rowspan="2">照片序号</th>
+                <th width="36%" rowspan="2">备注</th>
+         	  </tr>
+       	    </thead>
+            <tbody>
+              <tr th:each="item:${pipe.items}">
+                <td><input type='hidden' th:value="${item.id}"/><a></a></td>
+                <td><input type="text" th:value="${item.dist}"/></td>
+                <td><input type="text" th:value="${item.code}"/></td>
+                <td><input type="text" th:value="${item.grade}"/></td>
+				<td><input type="text" th:value="${item.location}"/></td>
+				<td><input type="text" th:value="${item.picture}"/></td>
+				<td><input type="text" th:value="${item.remarks}"/></td>
+				<td><input type="text" th:value="${item.path}"/></td>
+			  </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="remark">
+          <span style="align:right">备注说明：</span>
+          <input type="text" name="remarks" th:value="${pipe.remarks}"/>
+        </div>
+        <input type="button" value="确定" class="combtn">
+        <input type="text" id="pagebox">
+        <input type="button" id="pagebtn" value=">>">
+        <div id="control" title="上一段">◁</div>
+        <div id="contro2" title="下一段">▷</div>
+	    </form>
+        <img th:if="${pipe == null}" src="/cctv/img/null.png" style="margin:120px 400px;float:left;">
+        <input type="file" id="file1" accept="video/*" style="display:none"/>
+	    <input type="file" id="file2" accept="image/*" style="display:none"/>
+      </div>
+    </div>
+    <datalist id="codes">
+	  <option value="PL">管道外部的压力超过自身的承受力致使管道发送破裂。</option>
+	  <option value="BX">管道受外力挤 压造成形状变异</option>
+	  <option value="FS">管道内壁受侵蚀而流失或剥落，出现麻面或露出钢筋</option>
+	  <option value="CK">同一接口的两个管口产生横向偏差，未处于管道的正确位置</option>
+	  <option value="QF">接口位置偏移，管道竖向位置发生变化，在低处形成洼水</option>
+	  <option value="TJ">两根管道的端部未充分接合或接口脱离</option>
+	  <option value="TL">橡胶圈、沥青、水泥等类似的接口材料进入管道</option>
+	  <option value="AJ">支管未通过检查井直接侧向接入主管</option>
+	  <option value="CR">非管道系统附属设施的物体穿透管壁进入管内</option>
+	  <option value="SL">管外的水流入管道</option>
+	  <option value="CJ">杂质在管道底部沉淀淤积</option>
+	  <option value="JG">管道内壁上的附着物</option>
+	  <option value="ZW">管道内影响过流的阻挡物</option>
+	  <option value="CQ">管道闭水试验时砌筑的砖墙未拆除或拆除不彻底的遗留物</option>
+	  <option value="SG">单根树根或是树根群自然生长进入管道</option>
+	  <option value="FZ">管道内水面上的漂浮物</option>
+	  <option value="RS">摄像镜头部分或全部被水淹没</option>
+	  <option value="ZZ">检测由于意外因素而终止</option>
+	</datalist>
+	<datalist id="conts">
+	  <option>无明显缺陷</option>
+	  <option>管壁上可见细裂缝</option>
+	  <option>变形为管道直径的</option>
+	  <option>轻度腐蚀-表面轻微脱落</option>
+	  <option>中度腐蚀—表面剥落显露粗骨料或钢筋。</option>
+	  <option>重度腐蚀—粗骨料或钢筋完全显露。</option>
+	  <option>轻度错口—相接的两个管口偏差为</option>
+	  <option>中度错口—相接的两个管口偏差为</option>
+	  <option>重度错口—相接的两个管口偏差为</option>
+	  <option>起伏为管道直径的</option>
+	  <option>接口材料在管道内水平方向中心线</option>
+	  <option>支管进入主管内的长度大于主管直径的</option>
+	  <option>异物在管道内且占用过水断面积为</option>
+	  <option>过水断面损失</option>
+	</datalist>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>操作成功</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/cctv/css/user/success.css">
+	<script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("input").click(function(){
+    			  window.location.href="about:blank";
+    			  window.close();
+    		});
+    	});
+    </script>
+  </head>
+  <body>
+    <div style="width:100%;height:80px;background-color:#fff;float:left;">
+      <div id="logo"><a href="/user/loginview"><img src="/cctv/img/msdi.png"/></a></div>
+    </div>
+	<div id="main">
+	  <div id="mainTop">操作成功</div>
+      <div id="mainCenter">
+        <table style="margin:80px auto;">
+	    <tr align="center" height="80px"><td><img src="/cctv/img/complete.png"></td></tr>
+	    <tr align="center" height="55px"><td>数据已经成功提交！</td></tr>
+	    <tr align="center" height="55px"><td>返回主页面刷新查看更新数据</td></tr>
+	    <tr align="center" height="60px"><td><input type="button" value="关闭页面"/></td></tr>
+	  </table>
+      </div>
+	</div>
+	<div style="width:100%;margin-top:20px;float:left;color:#999;text-align:center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

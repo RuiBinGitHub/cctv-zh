@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>重设密码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/x-icon" href="/CCTV/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/CCTV/css/user/resetpass.css"/>
+    <script type="text/javascript" src="/CCTV/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/CCTV/js/user/resetpass.js"></script>
+  </head>
+  <body>
+    <div style="width:100%;height:80px;background-color:#fff;float:left;">
+      <div id="logo"><a href="/user/loginview"><img src="/CCTV/img/msdi.png"/></a></div>
+    </div>
+    <div id="main">
+      <div id="mainTop">重设密码</div>
+      <div id="mainCenter">
+        <div id="tips" th:text="${tips}"></div>
+        <form id="form1" action="/CCTV/user/resetpass" method="post">
+          <table id="tab1">
+            <tr>
+              <td align="right"><a>*</a>用户名称：</td>
+              <td><input type="text" name="username" th:value="${username}"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>电子邮箱：</td>
+              <td><input type="text" name="email" th:value="${email}"></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>验 证 码：</td>
+              <td>
+                <input type="text" id="code" style="width:140px">
+                <input type="button" id="getBtn" value="获取验证码"/>
+              </td>
+            </tr>
+            <tr>
+       	      <td align="right"><a>*</a>登录密码：</td>
+       	      <td><input type="password" name="password" th:value="${password}"/></td>
+            </tr>
+            <tr>
+       	      <td align="right"><a>*</a>确认密码：</td>
+       	      <td><input type="password" th:value="${password}"/></td>
+            </tr>
+            <tr>
+    	      <td align="left"></td>
+       	      <td><input type="button" value="确定" class="combtn"></td>
+       	    </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

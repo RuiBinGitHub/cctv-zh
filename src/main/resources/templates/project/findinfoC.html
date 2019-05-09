@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>任务概况</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/project/findinfoC.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/laydate/laydate.js"></script>
+    <script type="text/javascript" src="/cctv/js/project/findinfoC.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">
+          <span th:text="'工程名称：'+${project.name}"></span>
+          <a class="title">工作进程</a>
+        </div>
+        <form id="form1" action="/cctv/iteminfo/updateC" method="post">
+          <input type="hidden" name="id" th:value="${itemInfoC.id}"/>
+          <table id="tab1">
+            <tr>
+              <td width="150px" align="right"><a>*</a>进场踏勘日期：</td>
+              <td width="300px"><input type="text" class="datebox" name="inspection" th:value="${itemInfoC.inspection}"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>工作进场日期：</td>
+              <td><input type="text" class="datebox" name="workdate1" th:value="${itemInfoC.workdate1}"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>工作离场日期：</td>
+              <td><input type="text" class="datebox" name="workdate2" th:value="${itemInfoC.workdate2}"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>资料整理日期：</td>
+              <td><input type="text" class="datebox" name="collect" th:value="${itemInfoC.collect}"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>报告编写日期：</td>
+              <td><input type="text" class="datebox" name="compile" th:value="${itemInfoC.compile}"/></td>
+            </tr>
+            <tr>
+              <td align="right"></td>
+              <td><input type="button" value="确定" class="combtn"></td>
+            </tr>
+          </table>
+          <input type="hidden" name="project.id" th:value="${param.id}"/>
+        </form>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

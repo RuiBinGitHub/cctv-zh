@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+  <head>
+	<title>项目列表</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/project/showlist.css"/>
+	<script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/cctv/js/project/showlist.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainLeft">
+      	<div id="menuTitle">管理菜单</div>
+        <div class="menu1"><a href="/cctv/project/showlist">个人项目</a></div>
+        <div class="menu2"><a href="/cctv/project/operator">项目管理</a></div>
+        <div class="menu2"><a href="/cctv/person/showlist">人员管理</a></div>
+        <div class="menu2"><a href="/cctv/device/showlist">设备管理</a></div>
+      </div>
+      <div id="mainRight">
+        <div id="rightTop">项目列表</div>
+        <div id="rightMenu">
+          <span style="font-weight:600;margin-left:10px;float:left;">项目名称：</span>
+          <input id="menuBtn1" type="button" value="←"/>
+          <input id="menuText" th:value="${param.name}"/>
+          <input id="menuBtn2" type="button" value="立即查询"/>
+          <div style="width:520px;height:100%;float:left;"></div>
+          <input type="button" id="append" value="+ 添加"/>
+        </div>
+        <table id="tab1">
+          <thead>
+            <tr height="40px" style="background-color:#F0F0F0">
+              <th width="4%">NO</th>           
+			  <th width="16%">项目名称</th>   
+			  <th width="12%">项目编号</th> 
+			  <th width="24%">任务地点</th>   
+			  <th width="10%">任务概况</th>   
+			  <th width="10%">项目投入</th>   
+			  <th width="10%">项目进度</th> 
+			  <th width="14%">操作</th>   
+			</tr>       
+          </thead>
+          <tbody>
+            <tr th:each="project,status:${projects}" th:id="${project.id}">
+              <td th:text="${status.count+(page-1)*15}"></td>
+              <td><a href="" th:text="${project.name}"></a></td>
+              <td th:text="${project.no}"></td>
+              <td th:text="${project.site}"></td>
+          	  <td th:if="${project.infoA==0}"><input type="button" class="info1" value="！未完成"/></td>
+          	  <td th:if="${project.infoA==1}"><input type="button" class="info2" value="✔ 已完成"/></td>
+          	  <td th:if="${project.infoB==0}"><input type="button" class="info1" value="！未完成"/></td>
+          	  <td th:if="${project.infoB==1}"><input type="button" class="info2" value="✔ 已完成"/></td>
+          	  <td th:if="${project.infoC==0}"><input type="button" class="info1" value="！未完成"/></td>
+          	  <td th:if="${project.infoC==1}"><input type="button" class="info2" value="✔ 已完成"/></td>
+		      <td>
+		        <input type="button" value="编辑" class="tablebtn1">
+		        <input type="button" value="下载" class="tablebtn2">
+		        <input type="button" value="移除" class="tablebtn3">
+		      </td>
+          	</tr>
+          </tbody>
+        </table>
+        <img th:if="${#lists.isEmpty(projects)}" src="/cctv/img/null.png" style="margin:145px 415px;float:left;">
+        <table id="tab2" th:if="${!#lists.isEmpty(projects)}">
+          <tr height="30px">
+            <td width="45%" align="right"><input type="button" value="<<上一页" class="pagebtn"/></td>
+            <td width="10%" align="center"><a th:text="${page}"></a> / <a th:text="${cont}"></a></td>
+            <td width="45%" align="left"><input type="button" value="下一页>>" class="pagebtn"/></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

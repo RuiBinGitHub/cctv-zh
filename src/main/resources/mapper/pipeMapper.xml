@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.PipeDao">
+
+	<insert id="insertPipe" parameterType="Pipe" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO pipe VALUES(null,
+			#{no},
+			#{video},
+			#{smanhole},
+			#{fmanhole},
+			#{method},
+			#{laidyear},
+			#{sdepth},
+			#{fdepth},
+			#{pipetype},
+			#{material},
+			#{diameter},
+			#{direction},
+			#{pipelength},
+			#{testlength},
+			#{site},
+			#{date},
+			#{remarks},
+			#{project.id}
+		)
+	</insert>
+
+	<update id="updatePipe" parameterType="Pipe">
+		UPDATE pipe SET no=#{no},
+			video=#{video},
+			smanhole=#{smanhole},
+			fmanhole=#{fmanhole},
+			method=#{method},
+			laidyear=#{laidyear},
+			sdepth=#{sdepth},
+			fdepth=#{fdepth},
+			pipetype=#{pipetype},
+			material=#{material},
+			diameter=#{diameter},
+			direction=#{direction},
+			pipelength=#{pipelength},
+			testlength=#{testlength},
+			site=#{site},
+			date=#{date},
+			remarks=#{remarks},
+			projectid=#{project.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deletePipe" parameterType="Pipe">
+		DELETE FROM pipe WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoPipe" parameterType="Map" resultMap="PipeMap">
+		select p1.* from pipe p1 left join project p2 on p1.projectid=p2.id
+		<where>
+			<if test="id != null">
+				p1.id=#{id}
+			</if>
+			<if test="project != null">
+				and p2.id=#{project.id}
+			</if>
+			<if test="user != null">
+				and p2.userid=#{user.id}
+			</if>
+		</where>
+		order by no asc
+		<if test="no != null and no > -1">
+			limit 1 offset #{no}
+		</if>
+	</select>
+	
+	<select id="findListPipe" parameterType="Map" resultMap="PipeMap">
+		select * from pipe
+		<where>
+			<if test="project != null">
+				projectid=#{project.id}
+			</if>
+		</where>
+		order by no asc
+	</select>
+	
+	<select id="findListName" parameterType="Map" resultType="String">
+		select distinct ${name} from pipe where projectid=#{project.id}
+	</select>
+	
+	<select id="getCount" parameterType="Map" resultType="int">
+		select count(*) from pipe
+		<where>
+			<if test="project != null">
+				projectid=#{project.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="PipeMap" type="Pipe">
+		<id property="id" column="id"/>
+		<result property="no" column="no"/>
+		<result property="video" column="video"/>
+		<result property="smanhole" column="smanhole"/>
+		<result property="fmanhole" column="fmanhole"/>
+		<result property="method" column="method"/>
+		<result property="laidyear" column="laidyear"/>
+		<result property="sdepth" column="sdepth"/>
+		<result property="fdepth" column="fdepth"/>
+		<result property="pipetype" column="pipetype"/>
+		<result property="material" column="material"/>
+		<result property="diameter" column="diameter"/>
+		<result property="direction" column="direction"/>
+		<result property="pipelength" column="pipelength"/>
+		<result property="testlength" column="testlength"/>
+		<result property="site" column="site"/>
+		<result property="date" column="date"/>
+		<result property="remarks" column="remarks"/>
+		<result property="project.id" column="projectid"/>
+	</resultMap>
+	
+</mapper>
+ 

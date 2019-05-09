@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" th:fragment="navigation">
+  <head>
+  	<link rel="stylesheet" type="text/css" href="/cctv/css/navigation.css"/>
+  	<script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+  	<script type="text/javascript">
+  	$(document).ready(function() {
+  		$("#naviLogo").click(function() {
+  			window.location.href = "/cctv/project/showlist";
+  		});
+  	});
+  	</script>
+  </head>
+  <body>
+    <div id="naviMain">
+      <div id="navi">
+        <div style="width:780px;height:100%;float:left;">
+          <img id="naviLogo" src="/cctv/img/msdi.png" title="首页">
+        </div>
+        <div class="naviItem" style="width:120px">
+        </div>
+        <div class="naviItem">
+        </div>
+        <div class="naviItem">
+        </div>
+        <div class="naviItem">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

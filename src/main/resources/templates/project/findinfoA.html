@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>任务概况</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/project/findinfoA.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/laydate/laydate.js"></script>
+    <script type="text/javascript" src="/cctv/js/project/findinfoA.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">
+          <span th:text="'工程名称：'+${project.name}"></span>
+          <a class="title">任务概况</a>
+        </div>
+        <form id="form1" action="/cctv/iteminfo/updateA" method="post">
+        <input type="hidden" name="id" th:value="${itemInfoA.id}"/>
+        <fieldset>
+          <legend>部门信息</legend>
+          <table id="tab1">
+            <tr>
+              <td width="150px" align="right"><a>*</a>管理单位：</td>
+              <td width="400px"><input type="text" class="textbox" name="unit1" th:value="${itemInfoA.unit1}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>施工单位：</td>
+              <td width="400px"><input type="text" class="textbox" name="unit2" th:value="${itemInfoA.unit2}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>设计单位：</td>
+              <td width="400px"><input type="text" class="textbox" name="unit3" th:value="${itemInfoA.unit3}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>监理单位：</td>
+              <td width="400px"><input type="text" class="textbox" name="unit4" th:value="${itemInfoA.unit4}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>质量监督站：</td>
+              <td width="400px"><input type="text" class="textbox" name="unit5" th:value="${itemInfoA.unit5}"/></td>
+            </tr>
+          </table>
+        </fieldset>
+        <fieldset>
+          <legend>资料信息</legend>
+          <table id="tab2">
+            <tr>
+              <td width="150px" align="right"><a>*</a>监测范围：</td>
+              <td width="400px"><input type="text" class="textbox" name="extents" th:value="${itemInfoA.extents}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>监测目的：</td>
+              <td width="400px"><input type="text" class="textbox" name="purpose" th:value="${itemInfoA.purpose}"/></td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>监测时间：</td>
+              <td width="400px">
+                <input type="text" class="datebox" name="date1" th:value="${itemInfoA.date1}"/>
+                <span id="span">--</span>
+                <input type="text" class="datebox" name="date2" th:value="${itemInfoA.date2}"/>
+              </td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>交通条件：</td>
+              <td width="400px">
+                <select name="conditio" class="select" th:field="${itemInfoA.conditio}">
+                  <option value="">--</option>
+                  <option value="中心商业，附近具有甲类民用建筑工程的区域">中心商业，附近具有甲类民用建筑工程的区域</option>
+                  <option value="交通干道，附近具有乙类民用建筑工程的区域">交通干道，附近具有乙类民用建筑工程的区域</option>
+                  <option value="其他道路，附近具有丙类民用建筑工程的区域">其他道路，附近具有丙类民用建筑工程的区域</option>
+                  <option value="其他情况">其他情况</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>土质质料：</td>
+              <td width="400px">
+                <select name="material" class="select" th:field="${itemInfoA.material}">
+                  <option value="">--</option>
+                  <option value="粉砾层">粉砾层</option>
+                  <option value="红黏土">红黏土</option>
+                  <option value="湿陷性黄土(Ⅰ级)">湿陷性黄土(Ⅰ级)</option>
+                  <option value="湿陷性黄土(Ⅱ级)">湿陷性黄土(Ⅱ级)</option>
+                  <option value="湿陷性黄土(Ⅲ级)">湿陷性黄土(Ⅲ级)</option>
+                  <option value="湿陷性黄土(Ⅳ级)">湿陷性黄土(Ⅳ级)</option>
+                  <option value="膨胀土(强)">膨胀土(强)</option>
+                  <option value="膨胀土(中)">膨胀土(中)</option>
+                  <option value="膨胀土(弱)">膨胀土(弱)</option>
+                  <option value="淤泥类土(淤泥)">淤泥类土(淤泥)</option>
+                  <option value="淤泥类土(质土)">淤泥类土(质土)</option>
+                  <option value="一般土层">一般土层</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td width="150px" align="right"><a>*</a>检测依据：</td>
+              <td width="400px">
+                <select name="standard" class="select" th:field="${itemInfoA.standard}">
+                  <option value="'">--</option>
+                  <option value="国家建设部标准">国家建设部标准</option>
+                  <option value="上海市地方标准">上海市地方标准</option>
+                  <option value="广东省地方标准">广东省地方标准</option>
+                  <option value="北京排水集团企业标准">北京排水集团企业标准</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+        <input type="hidden" name="project.id" th:value="${param.id}"/>
+        </form>
+        <input type="button" value="确定" class="combtn">
+        <datalist id="list">
+          <option>检测排水管道结构性状况及功能性状况</option>
+        </datalist>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

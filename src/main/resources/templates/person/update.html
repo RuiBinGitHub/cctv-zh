@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>编辑人员</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/person/update.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/person/update.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">编辑人员</div>
+        <form id="form1" action="update" method="post">
+        <input type="hidden" name="id" th:value="${person.id}"/>
+        <table id="tab1">
+          <tr>
+            <td width="150px" align="right"><a>*</a>人员姓名：</td>
+            <td width="300px"><input type="text" class="textbox" name="name" th:value="${person.name}"/></td>
+          </tr>
+          <tr>
+            <td align="right"><a>*</a>人员职务：</td>
+            <td>
+              <select name="post" class="select" th:field="${person.post}">
+                <option value="项目负责人">项目负责人</option>
+                <option value="管道检测员">管道检测员</option>
+                <option value="内业处理员">内业处理员</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><a>*</a>人员职称：</td>
+    	    <td><input type="text" class="textbox" name="title" th:value="${person.title}"/></td>
+       	  </tr>
+          <tr>
+       	    <td align="right"><a>*</a>证件名称：</td>
+       	    <td><input type="text" class="textbox" name="papers" th:value="${person.papers}"/></td>
+          </tr>
+          <tr>
+    	    <td align="right"><a>*</a>证件编号：</td>
+    	    <td><input type="text" class="textbox" name="number" th:value="${person.number}"/></td>
+    	  </tr>
+          <tr>
+    	    <td align="right">备注说明：</td>
+    	    <td><input type="text" class="textbox" name="remark" th:value="${person.remark}"/></td>
+    	  </tr>
+          <tr>
+    	    <td align="left"></td>
+       	    <td><input type="button" value="确定" class="combtn"></td>
+       	  </tr>
+        </table>
+        <input type="hidden" name="date" th:value="${person.date}"/>
+        </form>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

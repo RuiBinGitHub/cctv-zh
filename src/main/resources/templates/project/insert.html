@@ -1,0 +1,74 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+  <head>
+  	<title>新建项目</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/project/insert.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/project/insert.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">新建项目</div>
+        <form id="form1" action="insert" method="post">
+        <fieldset>
+          <legend>项目信息</legend>
+          <table id="tab1">
+            <tr>
+              <td width="150px" align="right"><a>*</a>报告编号：</td>
+              <td width="400px"><input type="text" class="textbox" name="no"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>任务名称：</td>
+              <td><input type="text" class="textbox" name="name"/></td>
+            </tr>
+            <tr>
+              <td align="right"><a>*</a>任务地点：</td>
+    	      <td><input type="text" class="textbox" name="site"/></td>
+       	    </tr>
+            <tr>
+       	      <td align="right"><a>*</a>委托单位：</td>
+       	      <td><input type="text" class="textbox" name="client"/></td>
+            </tr>
+          </table>
+        </fieldset>
+        <fieldset>
+          <legend>参与人员</legend>
+          <table id="tab2">
+            <tr>
+              <td width="150px" align="right">现场操作员：</td>
+              <td width="400px"><input type="text" class="textbox" name="person" list="persons"/></td>
+            </tr>
+            <tr>
+              <td align="right">报告编写人：</td>
+              <td><input type="text" class="textbox" name="writer" list="persons"/></td>
+            </tr>
+            <tr>
+              <td align="right">报告校核人：</td>
+    	      <td><input type="text" class="textbox" name="checker" list="persons"/></td>
+       	    </tr>
+            <tr>
+       	      <td align="right">报告批准人：</td>
+       	      <td><input type="text" class="textbox" name="approver" list="persons"/></td>
+            </tr>
+          </table>
+        </fieldset>
+        </form>
+        <datalist id="persons">
+          <option th:each="person:${persons}" th:value="${person.name}" th:text="${person.post}">
+        </datalist>
+        <input type="button" value="确定" class="combtn">
+        <div id="tips">*生成报告前请注意输入项目参与人员信息，防止报告信息缺失！</div>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.ItemDao">
+
+	<insert id="insertItem" parameterType="Item" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO item VALUES(null,
+			#{no},
+			#{dist},
+			#{code},
+			#{grade},
+			#{location},
+			#{picture},
+			#{remarks},
+			#{path},
+			#{pipe.id}
+		)
+	</insert>
+
+	<update id="updateItem" parameterType="Item">
+		UPDATE item SET no=#{no},
+			dist=#{dist},
+			code=#{code},
+			grade=#{grade},
+			location=#{location},
+			picture=#{picture},
+			remarks=#{remarks},
+			path=#{path},
+			pipeid=#{pipe.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deleteItem" parameterType="Item">
+		DELETE FROM item WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoItem" parameterType="Map" resultMap="ItemMap">
+		select i.* from item i left join pipe p1 on p1.id=i.pipeid left join project p2 on p2.id=p1.projectid
+		<where>
+			<if test="id != null">
+				and i.id = #{id}
+			</if>
+			<if test="user != null">
+				and p2.userid = #{user.id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findListItem" parameterType="Map" resultMap="ItemMap">
+		select i.* from item i left join pipe p1 on p1.id=i.pipeid left join project p2 on p2.id=p1.projectid
+		<where>
+			<if test="picture != null">
+				and i.picture != ''
+			</if>
+			<if test="path != null">
+				and i.path != ''
+			</if>
+			<if test="pipe != null">
+				and p1.id = #{pipe.id}
+			</if>
+			<if test="project != null">
+				and p2.id = #{project.id}
+			</if>
+		</where>
+		order by p1.no,i.no
+	</select>
+	
+	<resultMap id="ItemMap" type="Item">
+		<id property="id" column="id"/>
+		<result property="no" column="no"/>
+		<result property="dist" column="dist"/>
+		<result property="code" column="code"/>
+		<result property="grade" column="grade"/>
+		<result property="location" column="location"/>
+		<result property="picture" column="picture"/>
+		<result property="remarks" column="remarks"/>
+		<result property="path" column="path"/>
+		<result property="pipe.id" column="pipeid"/>
+	</resultMap>
+	
+</mapper>
+ 

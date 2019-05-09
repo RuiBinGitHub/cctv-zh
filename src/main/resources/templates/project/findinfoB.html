@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>项目投入</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/project/findinfoB.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/project/findinfoB.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">
+          <span th:text="'工程名称：'+${project.name}"></span>
+          <a class="title">项目投入</a>
+        </div>
+        <input type="hidden" id="devicelist" th:value="${itemInfoB.devices}"/>
+        <input type="hidden" id="personlist" th:value="${itemInfoB.persons}"/>
+        
+        <form id="form1" action="/cctv/iteminfo/updateB" method="post">
+          <input type="hidden" name="id" th:value="${itemInfoB.id}"/>
+          <div class="memu">设备列表</div>
+          <div class="list">
+            <table id="tab1">
+              <thead>
+                <tr height="40px">
+                  <th width="5%"></th>
+                  <th width="20%">设备名称</th>
+                  <th width="15%">设备型号</th>
+                  <th width="20%">生产厂家</th>
+                  <th width="20%">出厂编号</th>
+                  <th width="20%">证书编号</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="device:${devices}">
+                  <td><input type="checkbox" th:value="${device.id}"/></td>
+                  <td th:text="${device.name}"></td>
+                  <td th:text="${device.model}"></td>
+                  <td th:text="${device.factory}"></td>
+                  <td th:text="${device.number1}"></td>
+                  <td th:text="${device.number2}"></td>
+                </tr>
+              </tbody>
+            </table>
+            <img th:if="${#lists.isEmpty(devices)}" src="/cctv/img/null.png">
+          </div>
+          <div class="memu">人员列表</div>
+          <div class="list">
+            <table id="tab2">
+              <thead>
+                <tr height="40px">
+                  <th width="5%"></th>
+                  <th width="20%">人员姓名</th>
+                  <th width="15%">人员职务</th>
+                  <th width="20%">人员职称</th>
+                  <th width="20%">证件名称</th>
+                  <th width="20%">证书编号</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="person:${persons}">
+                  <td><input type="checkbox" th:value="${person.id}"/></td>
+                  <td th:text="${person.name}"></td>
+                  <td th:text="${person.post}"></td>
+                  <td th:text="${person.title}"></td>
+                  <td th:text="${person.papers}"></td>
+                  <td th:text="${person.number}"></td>
+                </tr>
+              </tbody>
+            </table>
+            <img th:if="${#lists.isEmpty(persons)}" src="/cctv/img/null.png">
+          </div>
+          <input type="hidden" name="project.id" th:value="${param.id}"/>
+        </form>
+        <input type="button" value="确定" class="combtn">
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

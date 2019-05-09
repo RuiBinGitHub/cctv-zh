@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<title>管道浏览</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/cctv/css/pipe/showpipe.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/pipe/showpipe.js"></script>
+  </head>
+  <body>
+    <div th:replace="navigation::navigation"></div>
+    <div id="Tip"></div>
+    <div id="main">
+      <div id="mainInfo">
+        <div id="mainTop">
+          <span style="width:820px;float:left;">管道浏览</span>
+        </div>
+        <input type="hidden" id="size"  th:value="${size}"/>
+        <input type="hidden" id="id" th:value="${param.id}"/>
+        <form id="form1" method="post" th:if="${pipe != null}">
+        <input type="hidden" id="no"  th:value="${pipe.no}"/>
+        <div id="menu">
+          <span style="width:620px;" th:text="任务名称：+ ${project.name}"></span>
+          <span><a th:text="'第 ' + ${pipe.no}+' 页 / 共 '+${size}+' 页'"></a></span>
+        </div>
+        <table id="tab1">
+          <tr>
+            <td width="100px" align="right">录像文件：</td>
+            <td width="160px" align="center" th:text="${pipe.video}"/></td>
+            <td width="100px" align="right">管段编号：</td>
+            <td width="68px" align="center" th:text="${pipe.smanhole}"/></td>
+            <td width="22px" align="center">→</td>
+            <td width="68px" align="center" th:text="${pipe.fmanhole}"/></td>
+            <td width="100px" align="right">检测方法：</td>
+            <td width="160px" align="center" th:text="${pipe.method}"/></td>
+          </tr>
+          <tr>
+            <td align="right">敷设年代：</td>
+            <td align="center" th:text="${pipe.laidyear}"/></td>
+            <td align="right">起点埋深：</td>
+            <td align="center" colspan="3" th:text="${pipe.sdepth}"/></td>
+            <td align="right">终点埋深：</td>
+            <td align="center" th:text="${pipe.fdepth}"/></td>
+          </tr>
+          <tr>
+            <td align="right">管段类型：</td>
+            <td align="center" th:text="${pipe.pipetype}"/></td>
+            <td align="right">管段材质：</td>
+            <td align="center" colspan="3" th:text="${pipe.material}"/></td>
+            <td align="right">管道直径：</td>
+            <td align="center" th:text="${pipe.diameter}"/></td>
+          </tr>
+          <tr>
+            <td align="right">检测方向：</td>
+            <td align="center" th:text="${pipe.direction}"/></td>
+            <td align="right">管段长度：</td>
+            <td align="center" colspan="3" th:text="${pipe.pipelength}"/></td>
+            <td align="right">检测长度：</td>
+            <td align="center" th:text="${pipe.testlength}"/></td>
+          </tr>
+          <tr>
+            <td align="right">检测地点：</td>
+            <td colspan="5" style="text-indent:5px;" th:text="${pipe.site}"/></td>
+            <td align="right">检测日期：</td>
+            <td align="center" th:text="${pipe.date}"/></td>
+          </tr>
+        </table>
+        <table id="tab2">
+          <tr height="30px">
+            <td style="text-indent:10px;">视频</td>
+            <td style="text-indent:10px;">图片</td>
+          </tr>
+          <tr height="275px" align="center">
+            <td><video id="video" poster="/cctv/img/poster.png" controls="controls"></video></td>
+            <td><img id="image" src="/cctv/img/00001.png" title="图片浏览"></img></td>
+          </tr>
+        </table>
+        <div id="itemMemu">
+          <div>记录数据</div>
+        </div>
+        <div id="showItem">
+          <table id="tab3">
+        	<thead>
+         	  <tr height="30px">
+               	<th width="4%" rowspan="2"></th>
+                <th width="12%" rowspan="2">距离(m)</th>
+                <th width="12%" rowspan="2">缺陷代码</th>
+                <th width="12%" rowspan="2">等级</th>
+                <th width="12%" rowspan="2">位置</th>
+                <th width="12%" rowspan="2">照片序号</th>
+                <th width="36%" rowspan="2">备注</th>
+         	  </tr>
+       	    </thead>
+            <tbody>
+              <tr th:each="item:${pipe.items}">
+                <td align="center"><a></a></td>
+                <td th:text="${item.dist}"></td>
+                <td th:text="${item.code}"></td>
+                <td th:text="${item.grade}"></td>
+				<td th:text="${item.location}"></td>
+				<td th:text="${item.picture}"></td>
+				<td th:text="${item.remarks}"></td>
+				<td th:text="${item.path}" style="display:none"></td>
+			  </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="remark">
+          <span style="align:right">备注说明：</span>
+          <input type="text" th:value="${pipe.remarks}" readonly="readonly"/>
+        </div>
+        <input type="text" id="pagebox">
+        <input type="button" id="pagebtn" value=">>">
+        <div id="control" title="上一段">◁</div>
+        <div id="contro2" title="下一段">▷</div>
+        </form>
+        <img th:if="${pipe == null}" src="/cctv/img/null.png" style="margin:120px 400px;float:left;">
+        <input type="file" id="file1" accept="video/*" style="display:none"/>
+	    <input type="file" id="file2" accept="image/*" style="display:none"/>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

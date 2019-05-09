@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>用户注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/x-icon" href="/cctv/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/cctv/css/user/logon.css"/>
+    <script type="text/javascript" src="/cctv/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/cctv/js/user/logon.js"></script>
+  </head>
+  <body>
+    <div style="width:100%;height:80px;background-color:#fff;float:left;">
+      <div id="logo"><a href="/cctv/user/loginview"><img src="/cctv/img/msdi.png"/></a></div>
+    </div>
+    <div id="main">
+      <div id="mainTop">用户注册</div>
+      <div id="mainCenter">
+        <div id="tips" th:text="${tips}"></div>
+        <form id="form1" action="/cctv/user/logon" method="post">
+        <table id="tab1">
+          <tr>
+            <td align="right"><a>*</a>用户名称：</td>
+            <td><input type="text" name="name" th:value="${user?.name}"/></td>
+          </tr>
+          <tr>
+            <td align="right"><a>*</a>登录账号：</td>
+    	    <td><input type="text" name="username" th:value="${user?.username}"/></td>
+       	  </tr>
+          <tr>
+       	    <td align="right"><a>*</a>登录密码：</td>
+       	    <td><input type="password" name="password" th:value="${user?.password}"/></td>
+          </tr>
+          <tr>
+       	    <td align="right"><a>*</a>确认密码：</td>
+       	    <td><input type="password" th:value="${user?.password}"/></td>
+          </tr>
+          <tr>
+            <td align="right"><a>*</a>公司名称：</td>
+            <td><input type="text" name="companyName" th:value="${companyName}"></td>
+          </tr>
+          <tr>
+    	    <td align="left"></td>
+       	    <td><input type="button" value="确定" class="combtn"></td>
+       	  </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:20px;float:left;color:#ccc;text-align: center;font-size:14px;">
+      <p>香港麦斯迪埃高科技有限责任公司</p>
+      <p>Copyright © 2017 All Rights Reserved</p>	
+    </div>
+  </body>
+</html>

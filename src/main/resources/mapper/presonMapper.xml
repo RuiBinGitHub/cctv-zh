@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.dao.PersonDao">
+
+	<insert id="insertPerson" parameterType="Person" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO person VALUES(null,
+			#{name},
+			#{post},
+			#{title},
+			#{papers},
+			#{number},
+			#{remark},
+			#{date},
+			#{company.id}
+		)
+	</insert>
+
+	<update id="updatePerson" parameterType="Person">
+		UPDATE person SET name=#{name},
+			post=#{post},
+			title=#{title},
+			papers=#{papers},
+			number=#{number},
+			remark=#{remark},
+			date=#{date},
+			companyid=#{company.id}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="deletePerson" parameterType="Person">
+		DELETE FROM person WHERE id=#{id}
+	</delete>
+
+	<select id="findInfoPerson" parameterType="Map" resultMap="PersonMap">
+		select * from person
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findListPerson" parameterType="Map" resultMap="PersonMap">
+		select * from person
+		<where>
+			<if test="name != null">
+				and name like #{name}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+		order by date desc
+		<if test="page > 0">
+			limit 15 offset page
+		</if>
+	</select>
+	
+	<select id="getCount" parameterType="Map" resultType="int">
+		select count(*) from person
+		<where>
+			<if test="name != null">
+				and name like #{name}
+			</if>
+			<if test="company != null">
+				and companyid = #{company.id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="PersonMap" type="Person">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="post" column="post"/>
+		<result property="title" column="title"/>
+		<result property="papers" column="papers"/>
+		<result property="number" column="number"/>
+		<result property="remark" column="remark"/>
+		<result property="date" column="date"/>
+		<result property="company.id" column="companyid"/>
+	</resultMap>
+</mapper>
+ 
